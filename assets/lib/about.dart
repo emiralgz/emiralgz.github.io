@@ -15,9 +15,42 @@ class AboutPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(
-              "https://pbs.twimg.com/profile_images/1920410241713238016/ETDZYSgg_400x400.jpg",
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16), // rounded corners
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Image.network(
+                  "https://pbs.twimg.com/profile_images/1920410241713238016/ETDZYSgg_400x400.jpg",
+                  width: 150,
+                  height: 150,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return SizedBox(
+                      width: 150,
+                      height: 150,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
+
             const SizedBox(height: 16),
             Text(
               stringDict[selectedLang]["aboutText"] ?? 'No content',
