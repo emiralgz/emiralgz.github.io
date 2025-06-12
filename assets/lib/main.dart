@@ -144,16 +144,10 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         centerTitle: true,
-        title: Flexible(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
+        title:Text(
               stringDict[widget.selectedLang]['title'],
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
+              style: TextStyle(fontWeight: FontWeight.bold)
         ),
         actions: [
           Flexible(
